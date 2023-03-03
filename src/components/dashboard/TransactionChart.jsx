@@ -1,15 +1,6 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, PieChart, Pie, Cell, Legend, Label } from 'recharts';
 
 const TransactionChart = ({ totalExpenses, totalIncome, weeklyTransactions }) => {
-  console.log(weeklyTransactions);
-
-  const data = [
-    { date: 'Week 1', income: 400, expense: 2400 },
-    { date: 'Week 2', income: 800, expense: 500 },
-    { date: 'Week 3', income: 200, expense: 0 },
-    { date: 'Week 4', income: 0, expense: 2400 }
-  ];
-
   const pieChartData = [
     { name: 'Income', value: totalIncome },
     { name: 'Expenses', value: totalExpenses }
