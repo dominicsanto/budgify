@@ -12,10 +12,9 @@ A budget web app showcasing the ability of porgrammable banking
 Open your terminal and run the following
 
 ```bash
-git clone REPLACE WITH REPO LNK
+git clone https://github.com/dominicsanto/budgify.git
 npm install
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
