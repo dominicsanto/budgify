@@ -24,6 +24,8 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+If you would like to fork this app, please see the [following](https://docs.github.com/en/get-started/quickstart/fork-a-repo)
+
 ## Contributions
 
 Pull requests and changes are welcome
