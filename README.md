@@ -2,6 +2,8 @@
 
 A budget web app showcasing the ability of porgrammable banking
 
+![Dashboard](/docs/dashboard.png)
+
 ## Requirements
 
 - Terminal Application
@@ -21,3 +23,7 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Contributions
+
+Pull requests and changes are welcome
