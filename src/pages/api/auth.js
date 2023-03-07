@@ -25,12 +25,12 @@ const authHandler = async (req, res) => {
       })
     );
 
-    res.status(response.status);
-    res.json(response.data);
+    // res.status(response.status);
+    // res.json(response.data);
   }
   catch(e) {
     console.log(e)
-    res.status(e.response.status).json(e.response.data);
+    // res.status(e.response.status).json(e.response.data);
   }
 }
 
