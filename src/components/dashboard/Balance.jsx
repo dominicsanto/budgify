@@ -9,7 +9,7 @@ const Balance = ({ currentBalance, totalExpenses, totalIncome }) => {
           <dt className="text-base font-normal text-gray-900">Balance</dt>
           <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
             <div className="flex text-2xl font-semibold text-indigo-600">
-              {currentBalance}
+              {formatCurrency.format(currentBalance)}
             </div>
           </dd>
         </div>

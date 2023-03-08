@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from 'react'
 import { useRouter } from "next/router";
+import FlashAlert from "../shared/FlashAlert";
 
 const Login = () => {
   const router = useRouter();
@@ -8,6 +9,7 @@ const Login = () => {
   const [clientSecret, setClientSecret] = useState('');
   const [apiKey, setApiKey] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [errMessage, setErrMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,9 +29,7 @@ const Login = () => {
     }
     catch(e) {
       setIsLoading(false);
-      const errMessage = e.response?.data?.message || 'An unexpected error occured';
-      console.log(errMessage);
-      // addErrorMessage('Login Failed!', errMessage);
+      setErrMessage('Failed to authenticate with the details provided');
     }
   };
 
@@ -39,6 +39,9 @@ const Login = () => {
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-5xl font-bold tracking-tight text-gray-900">B U D G I F Y</h2>
         <p className="mt-6 text-center text-xs text-gray-900">Enter your API details</p>
+        { errMessage &&
+          <FlashAlert message={errMessage} />
+        }
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">

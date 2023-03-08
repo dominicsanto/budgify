@@ -43,12 +43,12 @@ If you would like to fork this app, please see [following guide](https://docs.gi
 ## Contributions
 
 Possible additions:
+
 ```
 - Ability to select a specific date to filter transactions by
 ```
 
 Pull requests and changes are welcome.
-
 
 ## License
 

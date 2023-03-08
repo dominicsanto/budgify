@@ -8,6 +8,7 @@ import { getClosingBalance, currentMonth, getTotalsPerType, formatTransactions, 
 import Balance from "./Balance";
 import TransactionTable from "./TransactionTable";
 import TransactionChart from "./TransactionChart";
+import WarningAlert from "../shared/WarningAlert";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -18,16 +19,18 @@ const Dashboard = ({ bankAccount, transactions }) => {
 
   const [weeklyTransactions, setWeeklyTransactions] = useState(null)
   const [formattedTransactions, setFormattedTransactions] = useState(null)
-  const [closingBalance, setclosingBalance] = useState('0.00')
+  const [closingBalance, setClosingBalance] = useState('0.00')
   const [totalExpenses, setTotalExpenses] = useState('0.00')
   const [totalIncome, setTotalIncome] = useState('0.00')
 
   useEffect(() => {
-    setclosingBalance(getClosingBalance(transactions));
-    setTotalExpenses(getTotalsPerType(transactions, "DEBIT"));
-    setTotalIncome(getTotalsPerType(transactions, "CREDIT"));
-    setFormattedTransactions(formatTransactions(transactions));
-    setWeeklyTransactions(getWeeklyTransactions(transactions));
+    if (Object.keys(transactions).length > 0) {
+      setClosingBalance(getClosingBalance(transactions));
+      setTotalExpenses(getTotalsPerType(transactions, "DEBIT"));
+      setTotalIncome(getTotalsPerType(transactions, "CREDIT"));
+      setFormattedTransactions(formatTransactions(transactions));
+      setWeeklyTransactions(getWeeklyTransactions(transactions));
+    }
   }, [transactions]);
 
   const logout = async () => {
@@ -35,11 +38,9 @@ const Dashboard = ({ bankAccount, transactions }) => {
       await axios.post('/api/logout');
 
       router.push('/');
-      // addMessage('Logout Successful');
     }
     catch(e) {
       console.error(e);
-      // addErrorMessage('Logout Failed', 'Something went wrong');
     }
   };
 
@@ -101,23 +102,30 @@ const Dashboard = ({ bankAccount, transactions }) => {
       </header>
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <>
           <Balance
             currentBalance={closingBalance}
             totalExpenses={totalExpenses}
             totalIncome={totalIncome}
           />
-          {formattedTransactions &&
-            <>
-              <TransactionTable
-                transactions={formattedTransactions}
-              />
-              <TransactionChart
-                totalIncome={totalIncome}
-                totalExpenses={totalExpenses}
-                weeklyTransactions={weeklyTransactions}
-              />
-            </>
+          { formattedTransactions
+            ?
+              <>
+                <TransactionTable
+                  transactions={formattedTransactions}
+                />
+                <TransactionChart
+                  totalIncome={totalIncome}
+                  totalExpenses={totalExpenses}
+                  weeklyTransactions={weeklyTransactions}
+                />
+              </>
+            :
+            <WarningAlert
+              message="There are no transactions available for this current period"
+            />
           }
+        </>
         </div>
       </main>
     </div>
@@ -125,7 +133,8 @@ const Dashboard = ({ bankAccount, transactions }) => {
 }
 
 Dashboard.propTypes = {
-  bankAccount: PropTypes.object
+  bankAccount: PropTypes.object,
+  transactions: PropTypes.object
 };
 
 export default Dashboard;
