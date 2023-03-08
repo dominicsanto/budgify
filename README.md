@@ -18,14 +18,15 @@ Open your terminal and run the following
 
 ```bash
 git clone https://github.com/dominicsanto/budgify.git
+Rename the `.env.local.example` to `.env.local`
+```
+
+Then run the following
+
+```bash
+cd budgify
 npm install
 npm run dev
-```
-
-NB: Create the following file in the root director `.env.local` and add the following:
-
-```
-API_HOST=https://openapi.investec.com
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -35,3 +36,7 @@ If you would like to fork this app, please see the [following](https://docs.gith
 ## Contributions
 
 Pull requests and changes are welcome
+
+## License
+
+This project is MIT licensed
